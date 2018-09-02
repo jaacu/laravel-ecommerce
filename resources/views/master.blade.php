@@ -100,6 +100,9 @@
                         </div>
                     </div>
                     <!-- Column -->
+
+                    @yield('content')
+
                 </div>
                 <!-- Row -->
                 <!-- Row -->
