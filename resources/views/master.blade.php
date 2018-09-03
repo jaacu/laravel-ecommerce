@@ -826,6 +826,9 @@
     {{-- <script src="js/custom.min.js"></script> --}}
     <script src="{{ asset('js/custom.js')}}" type="text/javascript"></script>
 
+    <script src="{{ asset('js/customMain.js')}}" type="text/javascript"></script>
+
+
     @yield('scripts')
     <!-- ============================================================== -->
     <!-- This page plugins -->

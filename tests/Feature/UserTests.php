@@ -9,23 +9,21 @@ use App\User;
 
 class UserTests extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $this->assertTrue(true);
+    public function createUser(){
+        return factory(User::class)->make();
     }
 
-    public function testUserLogin(){
-        
-        $user = factory(User::class)->make();
+    public function testUserCanLogin(){
+        $user = $this->createUser();
+        auth()->login($user);
+        $this->assertTrue(auth()->check());
+    }
 
-        $this->assertInstanceOf(User::class, $user);
-        
-
-        //Puede 
+    public function testUserCanLogout(){
+        $user = $this->createUser();
+        auth()->login($user);
+        $response = $this->actingAs($user)
+                         ->post('/logout');
+        $this->assertFalse(auth()->check());
     }
 }

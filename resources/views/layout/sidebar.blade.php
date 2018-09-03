@@ -244,7 +244,10 @@
         <!-- item-->
         <a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
         <!-- item-->
-        <a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
+    <form action="{{ route('logout') }}" method="post" id="logoutForm">
+         {{ csrf_field() }}
+        <a id="logoutButton" href="logout" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
+    </form>
     </div>
     <!-- End Bottom points-->
 </aside>
