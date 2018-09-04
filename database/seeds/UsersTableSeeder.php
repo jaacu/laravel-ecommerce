@@ -17,9 +17,15 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('1234')
 
         ]);
-
+        
         $user->assignRole('super-admin');
 
-        factory('App\User', 10)->create();
+
+        factory('App\User', 10)->create()->each(function($u){
+            $u->assignRole('shopkeeper');
+        });
+        factory('App\User', 10)->create()->each(function($u){
+            $u->assignRole('client');
+        });
     }
 }

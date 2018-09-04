@@ -15,14 +15,15 @@ Route::get('/', function () {
     return view('master');
 });
 
-
+Route::get('/dashboard', function(){
+    return view('master');
+});
 
 Route::resource('user', 'UserController');
 
+Route::resource('product', 'ProductController');
+
+Route::resource('shop', 'ShopController');
+
 
 Auth::routes();
-
-Route::get('/spatie',function(){
-   $role =  Spatie\Permission\Models\Role::create(['name' => 'hello_darkness']);
-    dd($role);
-});
