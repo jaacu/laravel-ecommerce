@@ -22,3 +22,7 @@ Route::resource('user', 'UserController');
 
 Auth::routes();
 
+Route::get('/spatie',function(){
+   $role =  Spatie\Permission\Models\Role::create(['name' => 'hello_darkness']);
+    dd($role);
+});
