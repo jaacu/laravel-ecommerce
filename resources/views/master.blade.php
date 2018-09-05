@@ -102,7 +102,6 @@
                     <!-- Column -->
 
                     @yield('content')
-
                 </div>
                 <!-- Row -->
                 <!-- Row -->

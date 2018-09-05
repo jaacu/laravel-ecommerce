@@ -25,5 +25,8 @@ Route::resource('product', 'ProductController');
 
 Route::resource('shop', 'ShopController');
 
+Route::get('/logout',function(){
+    return App\User::first();
+});
 
 Auth::routes();
