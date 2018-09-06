@@ -11,33 +11,31 @@ use App\Product;
 use App\Shop;
 use App\User;
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-
-
 class ProductTests extends TestCase
 {
     use DatabaseTransactions, WithFaker;
 
-    public function getRandomProduct(){ return Product::all()->random(); }
-    
-    public function getRandomShopkeeper(){
-        do{
-         $user =  User::Role('shopkeeper')->get()->random();
-        }while( is_null($user->shop) );
+    public function createShopkeeper(){
+        $user = factory( User::class )->create();
+        $user->assignRole('shopkeeper');
+        $shop = factory( Shop::class )->create([ 'user_id' => $user->id ]);
+        $user->shop()->save($shop);
         return $user;
     }
+    public function createProduct(){
+        return $product = factory( Product::class )->create(['shop_id' => $this->createShopkeeper()->shop->id ]);
+    }
 
+    public function testcreateProductWorks(){
 
-    public function testGetRandomProductWorks(){
-
-        $product = $this->getRandomProduct();
+        $product = $this->createProduct();
 
         $this->assertInstanceOf( Product::class, $product );
     }
 
-    public function testGetRandomShopkeeperWorks(){
+    public function testcreateShopkeeperWorks(){
 
-        $user = $this->getRandomShopkeeper();
+        $user = $this->createShopkeeper();
 
         $this->assertInstanceOf( User::class, $user );
 
@@ -45,14 +43,13 @@ class ProductTests extends TestCase
 
         $this->assertInstanceOf( Shop::class , $user->shop );
 
-
     }
 
     public function testProductCreate(){
 
         $this->removeBadTestingMiddleware();
 
-        $user = $this->getRandomShopkeeper();
+        $user = $this->createShopkeeper();
         auth()->login($user);
 
         $data = [
@@ -74,7 +71,7 @@ class ProductTests extends TestCase
 
     public function testSingleProductShows(){
 
-        $product = $this->getRandomProduct();
+        $product = $this->createProduct();
         $response = $this->get(route('product.show',$product->id));
 
         $response->assertStatus(200);
@@ -89,7 +86,7 @@ class ProductTests extends TestCase
         
         $this->removeBadTestingMiddleware();
 
-        $product = $this->getRandomProduct();
+        $product = $this->createProduct();
 
         $user = $product->getUser();
         
@@ -107,7 +104,7 @@ class ProductTests extends TestCase
 
         $this->removeBadTestingMiddleware();
 
-        $product = $this->getRandomProduct();
+        $product = $this->createProduct();
 
         $user = $product->getUser();
 
