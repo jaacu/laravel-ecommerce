@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Shop;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\StoreShop;
+
 class ShopController extends Controller
 {
     /**
@@ -33,9 +35,16 @@ class ShopController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreShop $request)
     {
-        //
+        $validated = $request->validated();
+
+        $shop = Shop::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'user_id' => $request->user()->id
+        ]);
+        return $shop;
     }
 
     /**

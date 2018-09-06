@@ -29,7 +29,7 @@ class RolesAndPermissionsSeeder extends Seeder
             Permission::create(['name' => 'edit product']);
             Permission::create(['name' => 'delete product']);
             Permission::create(['name' => 'buy product']);
-            // Permission::create(['name' => 'own shop']);
+            Permission::create(['name' => 'create shop']);
 
             // create roles and assign created permissions
 
@@ -44,7 +44,8 @@ class RolesAndPermissionsSeeder extends Seeder
                 //Products
                 'create product',
                 'edit product',
-                'delete product'
+                'delete product',
+                'create shop'
                 ]);
 
             $role = Role::create(['name' => 'shopkeeper']); // Usuario Vende
@@ -52,7 +53,8 @@ class RolesAndPermissionsSeeder extends Seeder
                 'create product',
                 'edit product',
                 'delete product',
-                'buy product'
+                'buy product',
+                'create shop'
             ]);            
 
             $role = Role::create(['name' => 'client']); // Usuario Regular 
