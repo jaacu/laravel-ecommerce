@@ -16,7 +16,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        //
+        return Shop::all();
     }
 
     /**
@@ -26,7 +26,7 @@ class ShopController extends Controller
      */
     public function create()
     {
-        //
+        return 'create shop';
     }
 
     /**
@@ -55,7 +55,7 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
-        //
+        return $shop;
     }
 
     /**
@@ -66,7 +66,7 @@ class ShopController extends Controller
      */
     public function edit(Shop $shop)
     {
-        //
+        return 'editing' . $shop->name;
     }
 
     /**
@@ -76,9 +76,12 @@ class ShopController extends Controller
      * @param  \App\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shop $shop)
+    public function update(StoreShop $request, Shop $shop)
     {
-        //
+        $validated = $request->validated();
+        $shop->update($validated);
+        // $shop->save();
+        return route('shop.show', $shop->id);
     }
 
     /**
@@ -89,6 +92,11 @@ class ShopController extends Controller
      */
     public function destroy(Shop $shop)
     {
-        //
+        if( (auth()->id() == $shop->user->id and auth()->user()->hasPermissionTo('delete shop')) or auth()->user()->hasRole('admin') ){
+            $shop->delete();
+            return redirect('/');
+        } else {
+            abort(401);
+        }
     }
 }

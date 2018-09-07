@@ -16,7 +16,7 @@ class CreateShopsTable extends Migration
         Schema::create('shops', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('description')->nulleable();
+            $table->text('description')->nullable()->default(null);
             $table->unsignedInteger('user_id');
             $table->softDeletes();
             $table->foreign('user_id')

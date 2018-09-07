@@ -26,6 +26,64 @@ class ShopTests extends TestCase
         $this->assertInstanceOf( Shop::class , $shop);
     }
 
+    public function testShopDeletes(){
+        
+        $this->removeBadTestingMiddleware();
+
+        $shop = $this->createShop();
+
+        $user = $shop->user;
+        
+        auth()->login($user);
+
+        $response = $this->actingAs($user)
+                        ->delete(route( 'shop.destroy' , $shop->id) );
+
+        $shop = Shop::withTrashed()->find($shop->id);
+        $this->assertTrue($shop->trashed());
+
+    }
+
+    public function testShopUpdates(){
+
+        $this->removeBadTestingMiddleware();
+
+        $shop = $this->createShop();
+
+        $data = [
+            'name' => 'This is a valid new shop test name!!!!',
+            // 'description' => 'This is a valid new shop test description, a very long test description!!!!'
+            'description' => null
+        ];
+
+        $user = User::find( $shop->user->id );
+        $this->assertNotNull( $user );
+        auth()->login($user);
+
+        $response = $this->actingAs( $user )
+                        ->patch( route('shop.update' , $shop->id) , $data );
+
+        $this->assertDatabaseHas('shops' , $data);
+
+        $user = User::find( $shop->user->id );
+        $shop = Shop::find( $shop->id );
+        $this->assertEquals( $shop , $user->shop );
+        $this->assertEquals( $shop->name , $data['name']);
+        $this->assertNull( $shop->description);
+    }
+
+    public function testSingleShopShow(){
+        $shop = $this->createShop();
+        $response = $this->get(route('shop.show',$shop->id));
+
+        $response->assertStatus(200);
+
+        $response->assertSee($shop->name);       
+
+        if($shop->description)
+        $response->assertSee($shop->description);
+    }
+
     public function testShopCreate(){
 
         $this->removeBadTestingMiddleware();
