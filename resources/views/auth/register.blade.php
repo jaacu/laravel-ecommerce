@@ -1,77 +1,77 @@
-@extends('master')
-
+@extends('auth.layout')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+<div class="login-register" style="background-image:url({{asset('assets/images/background/login-register.jpg')}});">        
+    <div class="login-box card">
+    <div class="card-body">
+        <form class="form-horizontal form-material" id="loginform" method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                @csrf
+            <h3 class="box-title m-b-20">{{ __('Register') }}</h3>
+            <div class="form-group {{ $errors->has('name') ? ' has-danger' : '' }} ">
+                <div class="col-xs-12">
+                    <div class="controls">
+                    <input placeholder="{{ __('Name') }}" id="name" type="text" class="form-control{{ $errors->has('name') ? ' form-control-danger' : '' }}" name="name" value="{{ old('name') }}" required autofocus >
+                </div>
+                    @if ($errors->has('name'))
+                        <span class="form-control-feedback" role="alert">
+                            <strong>{{ $errors->first('name') }}</strong>
+                        </span>
+                    @endif
                 </div>
             </div>
-        </div>
+            <div class="form-group {{ $errors->has('email') ? ' has-danger' : '' }}  ">
+                <div class="col-xs-12">
+                        <input placeholder="{{ __('Email Address') }}" id="email" type="email" class="form-control{{ $errors->has('email') ? ' form-control-danger' : '' }}" name="email" value="{{ old('email') }}" required >
+
+                        @if ($errors->has('email'))
+                            <span class="form-control-feedback" role="alert">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                </div>
+            </div>
+            <div class="form-group {{ $errors->has('password') ? ' has-danger' : '' }}  ">
+                <div class="col-xs-12">
+                        <input placeholder="{{ __('Password') }}" id="password" type="password" class="form-control{{ $errors->has('password') ? ' form-control-danger' : '' }}" name="password" required>
+                        @if ($errors->has('password'))
+                            <span class="form-control-feedback" role="alert">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        @endif
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12">
+                        <input placeholder="{{ __('Confirm Password') }}" id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                </div>
+            </div>
+            <div class="form-group {{ $errors->has('rol') ? ' has-danger' : '' }}  ">
+                    <div class="col-xs-12">
+                            <select class="form-control {{ $errors->has('rol') ? ' form-control-danger' : '' }}" name="rol" id="rol">
+                                <option value="3">Client</option>
+                                <option value="4">Shopkeeper</option>
+                            </select>
+                            @if ($errors->has('rol'))
+                                <span class="form-control-feedback" role="alert">
+                                    <strong>{{ $errors->first('rol') }}</strong>
+                                </span>
+                            @endif
+                    </div>
+            </div>
+            <div class="form-group text-center m-t-20">
+                <div class="col-xs-12">
+                    <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">{{ __('Register') }}</button>
+                </div>
+            </div>
+            <div class="form-group m-b-0">
+                <div class="col-sm-12 text-center">
+                    <p>Already have an account? <a href="{{ route('login')}} " class="text-info m-l-5"><b>{{__('Login') }}</b></a></p>
+                </div>
+            </div>
+        </form>
+        
     </div>
+  </div>
 </div>
+
 @endsection

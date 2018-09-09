@@ -14,6 +14,7 @@ let mix = require('laravel-mix');
 mix.js('resources/assets/minimal/js/custom.js', 'public/js')
       .js('resources/assets/minimal/js/jquery.slimscroll.js', 'public/js')
       .js('resources/assets/minimal/js/waves.js', 'public/js')
+      // .js('resources/assets/minimal/js/validation.js', 'public/js')
       .js('resources/assets/minimal/js/sidebarmenu.js', 'public/js')
       .js('resources/assets/js/customMain.js', 'public/js')
       .sass('resources/assets/minimal/scss/style.scss', 'public/css/template.css');
