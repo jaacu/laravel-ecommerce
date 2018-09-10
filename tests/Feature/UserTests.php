@@ -32,12 +32,9 @@ class UserTests extends TestCase
 
         $response = $this->post( route('register') , $data );
 
-
-        $this->assertDatabaseHas('users', [
-            'name' => $data['name'],
-            'email' => $data['email']
-            ]);
         
+        $this->assertDatabaseHas('users', array_only( $data, [ 'name' , 'email' ]));
+
         $user = User::where('email', $data['email'])->first();
         
         $this->assertInstanceOf( User::class , $user );

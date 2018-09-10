@@ -1,7 +1,6 @@
 @extends('auth.layout')
 
 @section('content')
-<div class="login-register" style="background-image:url({{asset('assets/images/background/login-register.jpg')}});"> 
 @if (session('status'))
     <div class="alert alert-success w-100 text-center" style="position: fixed; top:0;"> {{ session('status') }} 
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
@@ -31,6 +30,5 @@
         </form>
     </div>
     </div>
-</div>
 
 @endsection

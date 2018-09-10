@@ -1,9 +1,10 @@
 {
-    "/js/sidebarmenu.js": "/js/sidebarmenu.js",
-    "/js/custom.js": "/js/custom.js",
+    "/js/custom.min.js": "/js/custom.min.js",
     "/css/template.css": "/css/template.css",
+    "/css/custom.css": "/css/custom.css",
+    "/js/sidebarmenu.js": "/js/sidebarmenu.js",
     "/js/waves.js": "/js/waves.js",
-    "/js/validation.js": "/js/validation.js",
     "/js/jquery.slimscroll.js": "/js/jquery.slimscroll.js",
-    "/js/customMain.js": "/js/customMain.js"
+    "/js/customMain.js": "/js/customMain.js",
+    "/js/sticky-kit.min.js": "/js/sticky-kit.min.js"
 }

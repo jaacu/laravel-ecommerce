@@ -1,7 +1,6 @@
 @extends('auth.layout')
 @section('content')
 
-<div class="login-register" style="background-image:url({{asset('assets/images/background/login-register.jpg')}});">        
     <div class="login-box card">
     <div class="card-body">
         <form class="form-horizontal form-material" id="loginform" method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
@@ -9,9 +8,7 @@
             <h3 class="box-title m-b-20">{{ __('Register') }}</h3>
             <div class="form-group {{ $errors->has('name') ? ' has-danger' : '' }} ">
                 <div class="col-xs-12">
-                    <div class="controls">
                     <input placeholder="{{ __('Name') }}" id="name" type="text" class="form-control{{ $errors->has('name') ? ' form-control-danger' : '' }}" name="name" value="{{ old('name') }}" required autofocus >
-                </div>
                     @if ($errors->has('name'))
                         <span class="form-control-feedback" role="alert">
                             <strong>{{ $errors->first('name') }}</strong>
@@ -72,6 +69,5 @@
         
     </div>
   </div>
-</div>
 
 @endsection

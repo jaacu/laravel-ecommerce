@@ -9,6 +9,18 @@ use App\Http\Requests\StoreShop;
 
 class ShopController extends Controller
 {
+
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware([ 'auth' , 'role:shopkeeper'])->except(['index' , 'show']);
+        $this->middleware([ 'shopkeeperMiddleware'])->only(['create' , 'store']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +38,7 @@ class ShopController extends Controller
      */
     public function create()
     {
-        return 'create shop';
+        return view('store.shop.create');
     }
 
     /**

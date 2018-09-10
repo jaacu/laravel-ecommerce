@@ -1,7 +1,6 @@
 @extends('auth.layout')
 
 @section('content')
-<div class="login-register" style="background-image:url({{asset('assets/images/background/login-register.jpg')}});">         
     <div class="login-box card">
     <div class="card-body">
         <form class="form-horizontal form-material" id="loginform" method="POST" action="{{ route('password.request') }}" aria-label="{{ __('Reset Password') }}">
@@ -41,6 +40,5 @@
         </form>
     </div>
     </div>
-</div>
 
 @endsection

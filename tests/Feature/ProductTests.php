@@ -122,13 +122,15 @@ class ProductTests extends TestCase
         $product = Product::find($product->id);
         $this->assertInstanceOf( Product::class , $product);
 
-        $this->assertEquals( $data['name'] , $product->name);
+        $this->assertDatabaseHas('products', $data);
 
-        $this->assertEquals( $data['description'] , $product->description);
+        // $this->assertEquals( $data['name'] , $product->name);
 
-        $this->assertEquals( $data['stock'] , $product->stock);
+        // $this->assertEquals( $data['description'] , $product->description);
 
-        $this->assertEquals( $data['price'] , $product->price);
+        // $this->assertEquals( $data['stock'] , $product->stock);
+
+        // $this->assertEquals( $data['price'] , $product->price);
         
     }
 }

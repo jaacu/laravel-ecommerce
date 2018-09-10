@@ -3,7 +3,7 @@
 <head>
     @include('layout.head')
 </head>
-<body>
+<body class="fix-sidebar fix-header card-no-border">
 @include('shared.template-spinner')
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
@@ -21,7 +21,6 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                @include('shared.breadcrumbs')
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
@@ -54,10 +53,11 @@
     <!--Menu sidebar -->
     <script src="{{ asset('js/sidebarmenu.js')}}"></script>
     <!--stickey kit -->
-    {{-- <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script> --}}
+    <script src="{{asset('js/sticky-kit.min.js')}}"></script>
     <!--Custom JavaScript -->
     {{-- <script src="js/custom.min.js"></script> --}}
-    <script src="{{ asset('js/custom.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('js/custom.min.js')}}" type="text/javascript"></script>
+    {{-- <script src="{{ asset('js/custom.js')}}" type="text/javascript"></script> --}}
 
     <script src="{{ asset('js/customMain.js')}}" type="text/javascript"></script>
 

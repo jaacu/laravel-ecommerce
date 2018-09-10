@@ -10,8 +10,14 @@
     <!-- ============================================================== -->
     <div id="main-wrapper">
         <section id="wrapper">
+            <div class="login-register" style="background-image:url({{asset('assets/images/background/login-register.jpg')}});">
+                <div>
+                    <h4><a class="link" style="position: fixed; top: 3.5%; left: 2%; color: white;" href="/">Back to the homepage.</a></h4>
+                </div>
             
-            @yield('content')
+                @yield('content')
+
+            </div>
                     
         </section>
 

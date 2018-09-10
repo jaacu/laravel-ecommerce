@@ -32,4 +32,9 @@ class User extends Authenticatable
     public function shop(){
         return $this->hasOne(Shop::class);
     }
+    /**
+     * Verifies if the user has a shop
+     * @return bool
+     */
+    public function hasShop() : bool { return ! is_null( $this->shop ); }
 }
