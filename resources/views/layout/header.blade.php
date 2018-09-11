@@ -7,7 +7,7 @@
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <!-- Logo icon -->
                 <b>
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -238,33 +238,46 @@
                     <form class="app-search">
                         <input type="text" class="form-control" placeholder="Search for..."> <a class="srh-btn"><i class="ti-search"></i></a> </form>
                 </li>
+                @auth
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('assets/images/users/1.jpg')}}" alt="user" class="profile-pic" /></a>
-                    <div class="dropdown-menu dropdown-menu-right animated flipInY">
-                        <ul class="dropdown-user">
-                            <li>
-                                <div class="dw-user-box">
-                                    <div class="u-img"><img src="{{asset('assets/images/users/1.jpg')}}" alt="user"></div>
-                                    <div class="u-text">
-                                        <h4>Steave Jobs</h4>
-                                        <p class="text-muted">varun@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
-                                </div>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                            <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                            <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
-                        </ul>
-                    </div>
+                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('assets/images/users/1.jpg')}}" alt="user" class="profile-pic" /></a>
+                        <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                            <ul class="dropdown-user">
+                                <li>
+                                    <div class="dw-user-box">
+                                        <div class="u-img"><img src="{{asset('assets/images/users/1.jpg')}}" alt="user"></div>
+                                        <div class="u-text">
+                                                <h4>{{ auth()->user()->name }}</h4>
+                                                <p class="text-muted">{{ auth()->user()->email }}</p>
+                                                @if ( auth()->user()->hasShop() )
+                                                <a href="{{ route('shop.show', auth()->user()->getShopId()) }}" class="btn btn-rounded btn-danger btn-sm">View My Shop</a>
+                                                @else
+                                                <a href="{{ route('shop.create') }}" class="btn btn-rounded btn-danger btn-sm">Create Your Shop!</a>                                        
+                                                @endif
+                                            </div>
+                                    </div>
+                                </li>
+                                @includeWhen( auth()->user()->hasRole('shopkeeper'), 'role.shopkeeper.partials.HeaderDropdown', ['user' => auth()->user() ])
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                <a href="logout" class="link logoutButton" data-toggle="tooltip" title="Logout"><i class="fa fa-power-off"></i> Logout</a>
+                                </li>   
+                            </ul>
+                        </div>
                 </li>
-                <li class="nav-item dropdown">
+                @endauth
+                @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}"> Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}"> Register</a>
+                </li>
+                @endguest
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="flag-icon flag-icon-us"></i></a>
                     <div class="dropdown-menu  dropdown-menu-right animated bounceInDown"> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </nav>

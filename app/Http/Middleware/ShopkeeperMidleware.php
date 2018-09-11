@@ -14,10 +14,23 @@ class ShopkeeperMidleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {    
-        if( is_null($request->user()->shop) )
-            return $next($request);
-        else 
-            return redirect( route('shop.edit', $request->user()->shop->id) );
+    {   
+        /**
+         * Verifies that the User has and store, otherwise sends him to the create store action
+         * And verifies that a User can't have more than one store
+         */
+        if( !$request->user()->hasShop() ){
+            if($request->url() != route('shop.create') and 
+                $request->url() != route('shop.store') )
+            return redirect( route('shop.create') );
+        } else {
+            if($request->url() == route('shop.create') or
+                $request->url() == route('shop.store')  ){
+                    return redirect( route('shop.edit', $request->user()->getShopId() ) );
+            }
+        }
+
+        return $next($request);
+        
     }
 }

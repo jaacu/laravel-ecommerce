@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('master');
+    return view('store.home');
 });
 
 Route::get('/dashboard', function(){
@@ -26,7 +26,15 @@ Route::resource('product', 'ProductController');
 Route::resource('shop', 'ShopController');
 
 Route::get('/logout',function(){
-    return App\User::first();
+    $user = App\User::all()->last();
+    // $user->removeRole('shopkeeper');
+    dump($user->getRoleNames());
+    $user->assignRole(3);
+    dump($user->getRoleNames());
+    // dd($user->email);
+
+
+    return view('shared.errorsahhh');
 });
 
 Auth::routes();

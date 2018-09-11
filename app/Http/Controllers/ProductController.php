@@ -9,6 +9,17 @@ use App\Http\Requests\StoreProduct;
 
 class ProductController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware([ 'auth' , 'role:shopkeeper' , 'shopkeeperMiddleware'])->except(['index' , 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +37,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return 'create form';
+        return view('store.product.create');
     }
 
     /**
@@ -45,7 +56,7 @@ class ProductController extends Controller
             'description' => $validated['description'],
             'stock' => $validated['stock'],
             'price' => $validated['price'],
-            'shop_id' => $request->user()->shop->id
+            'shop_id' => $request->user()->getShopId()
             ]);
 
         return route('product.show', $product->id);

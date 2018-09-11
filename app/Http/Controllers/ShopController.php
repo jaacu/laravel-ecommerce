@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Shop;
+Use App\User;   
 use Illuminate\Http\Request;
 
 use App\Http\Requests\StoreShop;
 
 class ShopController extends Controller
 {
-
-
     /**
      * Create a new controller instance.
      *
@@ -18,8 +17,7 @@ class ShopController extends Controller
      */
     public function __construct()
     {
-        $this->middleware([ 'auth' , 'role:shopkeeper'])->except(['index' , 'show']);
-        $this->middleware([ 'shopkeeperMiddleware'])->only(['create' , 'store']);
+        $this->middleware([ 'auth' , 'role:shopkeeper' , 'shopkeeperMiddleware'])->except(['index' , 'show']);
     }
     /**
      * Display a listing of the resource.
@@ -50,13 +48,12 @@ class ShopController extends Controller
     public function store(StoreShop $request)
     {
         $validated = $request->validated();
-
         $shop = Shop::create([
             'name' => $validated['name'],
             'description' => $validated['description'],
             'user_id' => $request->user()->id
         ]);
-        return $shop;
+        return redirect( route('shop.show' , $shop->id) );
     }
 
     /**
@@ -67,7 +64,7 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
-        return $shop;
+        return $shop->load('products');
     }
 
     /**
@@ -78,6 +75,9 @@ class ShopController extends Controller
      */
     public function edit(Shop $shop)
     {
+        $response = $this->keepInMyShop(request()->user() , $shop);
+        if( !is_null($response) ) return $response; 
+
         return 'editing' . $shop->name;
     }
 
@@ -111,4 +111,16 @@ class ShopController extends Controller
             abort(401);
         }
     }
+
+    /**
+     * Verifies that the user can only edit his own Shop, otherwise redirect to the users Shop
+     * @param \App\User $user
+     * @param \App\Shop $shop
+     * @return mixed
+     */
+    public function keepInMyShop(User $user , Shop $shop){
+        if( $user->getShopId() !== $shop->id  )
+            return redirect( route('shop.edit' , $user->getShopId() ) );
+        return null;
+    }           
 }

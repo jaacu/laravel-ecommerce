@@ -60,29 +60,30 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 78);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 13:
+/***/ 78:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(14);
+module.exports = __webpack_require__(79);
 
 
 /***/ }),
 
-/***/ 14:
+/***/ 79:
 /***/ (function(module, exports) {
 
 
-
 $(function () {
-    $('#logoutButton').click(function (e) {
+    $('.logoutButton').click(function (e) {
         $('#logoutForm').submit();
         e.preventDefault();
     });
+
+    $('#errorNotification').delay(500).slideDown().delay(5000).slideUp();
 });
 
 /***/ })

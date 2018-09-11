@@ -45,8 +45,8 @@
             <div class="form-group {{ $errors->has('rol') ? ' has-danger' : '' }}  ">
                     <div class="col-xs-12">
                             <select class="form-control {{ $errors->has('rol') ? ' form-control-danger' : '' }}" name="rol" id="rol">
-                                <option value="3">Client</option>
-                                <option value="4">Shopkeeper</option>
+                                <option value="4">Client</option>
+                                <option value="3">Shopkeeper</option>
                             </select>
                             @if ($errors->has('rol'))
                                 <span class="form-control-feedback" role="alert">

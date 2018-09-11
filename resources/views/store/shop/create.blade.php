@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<div class="col-xs-6 mx-auto">
+<div class="col-xs-6 col-7 mx-auto">
     <form class="form-material m-t-40" method="POST" action="{{ route('shop.store') }}">
         @csrf
         <div class="form-group">
