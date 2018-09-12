@@ -136,7 +136,7 @@
     </div>
     <!-- End Sidebar scroll-->
     <!-- Bottom points-->
-    <div class="sidebar-footer">
+    <div class="sidebar-footer linear-transition">
         <!-- item-->
         <a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
         <!-- item-->

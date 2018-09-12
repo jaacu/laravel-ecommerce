@@ -8,7 +8,7 @@
             <h1 class="text-left text-info mt-3"> Create a new Product</h1>
         </div>
         <div class="row align-items-center">
-            <div class="col-6">
+            <div class=" col-sm-12 col-lg-6">
                 <div class="form-group row {{ $errors->has('name') ? ' has-danger' : '' }} ">
                         <h3 class="col-md-5"><label class="control-label" for="name">Product Name </label></h3>
                         <div class="col-md-7">
@@ -22,7 +22,7 @@
                         </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-6">
                     <div class="form-group row {{ $errors->has('price') ? ' has-danger' : '' }} ">
                             <h3 class="col-md-3"><label class="control-label" for="price">Price </label></h3>
                             <div class="col-md-9">
@@ -37,7 +37,7 @@
                             </div>
                     </div>
             </div>
-            <div class="col-5">
+            <div class="col-lg-5 col-ms-8">
                     <div class="form-group row {{ $errors->has('stock') ? ' has-danger' : '' }} ">
                             <h3 class="col-md-3"><label class="control-label" for="stock">Stock </label></h3>
                             <div class="col-md-4">
@@ -54,7 +54,7 @@
                             <h3 class="col-md-12"><label class="control-label" for="tags">Tags </label></h3>
                             <div class="col-md-12">
                                 <input  placeholder="Add tags e.g action" id="tags" type="text" class="form-control{{ $errors->has('tags') ? ' form-control-danger' : '' }}" 
-                                name="tags" value="{{ old('tags') }}" required data-role="tagsinput">
+                                name="tags" value="{{ old('tags') }}" data-role="tagsinput">
                                 @if ($errors->has('tags'))
                                     <small class="form-control-feedback" role="alert">
                                         <strong>{{ $errors->first('tags') }}</strong>
@@ -63,13 +63,13 @@
                             </div>
                     </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
                 <div class="form-group row {{ $errors->has('description')  ? ' has-danger' : '' }} ">
                     <div class="col-12">
                         <h3><label class="control-label" for="description"> Description </label></h3>
                         <textarea class="form-control{{ $errors->has('description') ? ' form-control-danger' : '' }}" 
                         rows="3" placeholder=" e.g Happy Joe's It's a Store where you can find all kinds of fun shoes!!! " id="description"
-                         name="description"  required >{{ old('description') }}</textarea>
+                         name="description"  >{{ old('description') }}</textarea>
                         @if ($errors->has('description'))
                             <span class="form-control-feedback" role="alert">
                                 <strong>{{ $errors->first('description') }}</strong>
@@ -78,19 +78,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
                     <div class="form-group row {{ $errors->has('category')  ? ' has-danger' : '' }} ">
                         <div class="col-12">
                             <h3><label class="control-label" for="category"> Category </label></h3>
-                            <select class="select2 select2-multiple w-100" multiple 
-                             placeholder=" e.g Happy Joe's It's a Store where you can find all kinds of fun shoes!!! " id="category"
-                             name="category"  required  data-placeholder="Category">
-                             <option value="1">value 1</option>
-                             <option value="2">value 2</option>
-                             <option value="3">value 3</option>
-                             <option value="4">value 4</option>
-                             <option value="6">value 6</option>
-                            </select> 
+                            <select class="select2 select2-multiple w-100" multiple id="category" name="category[]"   data-placeholder="Category">
+                             {{-- <option value="category 1" {{in_array('category 1' , old('category')) ? 'selected' : '' }} >category 1</option> --}}
+                             <option value="category 12">category 2</option>
+                             <option value="category 13">category 3</option>
+                             <option value="category 14">category 4</option>
+                             <option value="category 16">category 5</option>
+                            </select>
                             @if ($errors->has('category'))
                                 <span class="form-control-feedback" role="alert">
                                     <strong>{{ $errors->first('category') }}</strong>
@@ -99,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12">
                 <div class="form-group text-center m-t-20">
                     <button type="submit" class="btn btn-success waves-effect waves-light btn-md"> <i class="fa fa-check"></i> Create</button>
                 </div>
@@ -119,7 +117,8 @@
 @section('scripts')
 <script src="{{asset('js/jquery.bootstrap-touchspin.min.js')}}"></script>
 <script src="{{asset('js/bootstrap-tagsinput.min.js')}}"></script>
-<script src="{{asset('js/select2.full.min.js')}}"></script>
+<script src="{{ url('assets/plugins/select2/dist/js/select2.min.js') }}"></script>
+<script src="{{asset('js/select2.min.js')}}" type="text/javascript"></script>
 @endsection
 
 @section('jQuery')
@@ -141,5 +140,6 @@ $("input[name='stock']").TouchSpin({
     boostat: 5,
     maxboostedstep: 10,
 });
+$(".select2").select2();
 
 @endsection

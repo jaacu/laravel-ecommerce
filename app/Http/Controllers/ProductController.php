@@ -50,7 +50,6 @@ class ProductController extends Controller
     {
 
         $validated = $request->validated();
-
         $product = Product::create([
             'name' => $validated['name'],
             'description' => $validated['description'],
@@ -59,7 +58,7 @@ class ProductController extends Controller
             'shop_id' => $request->user()->getShopId()
             ]);
 
-        return route('product.show', $product->id);
+        return redirect(route('product.show', $product->id));
     }
 
     /**
@@ -70,7 +69,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return $product;
+        return view('store.product.showSingle' , compact('product'));
     }
 
     /**

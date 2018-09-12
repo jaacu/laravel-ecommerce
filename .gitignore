@@ -13,3 +13,8 @@ yarn-error.log
 .env
 .phpunit.result.cache
 goals-trello-stuff.txt
+auto-test.php
+/resources/assets/minimal
+/resources/assets/assets
+/public
+storage
