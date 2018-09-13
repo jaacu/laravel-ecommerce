@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-lg-5 col-sm-12">
         <div class="product-image-wrapper">
-            <img src="{{ url('assets/images/background/socialbg.jpg')}}" alt="Product" class="card-img">
+            <img src="{{ url('assets/images/background/socialbg.jpg')}}" alt="Product" class="img-rounded card-img">
         </div>
     </div>
     <div class="col-lg-7 col-sm-12 border">
@@ -20,6 +20,14 @@
             </div>
             <div class="col-lg-6 col-sm-12 border py-2">
                     <h4 class="text-center" data-toggle="tooltip" title="In Stock"><span class="stock" > {{ $product->stock }}</span> <i class="fa fa-cubes"></i></h4>
+            </div>
+            <div class="col-lg-6 col-sm-12 border py-2">
+                <h4 class="text-center" data-toggle="tooltip" title="Tags"><span class="tags" > {{ count($product->tags) }}</span> <i class="fa fa-tags"></i></h4>
+                @forelse ($product->tags as $tag)
+                   <span class="tag badge badge-info">{{$tag->name}}</span> 
+                @empty
+                    <h4 class="text-center"> This product doesn't have tags.</h4>
+                @endforelse
             </div>
         </div>
     
@@ -37,7 +45,12 @@
 .product-icon{
     font-size: 40px;
 }
-
+.tag{
+    color: #fff;
+    font-size: 15px;
+    padding: 10px;
+    margin: 3px 10px;
+}
 </style>
 @endsection
 

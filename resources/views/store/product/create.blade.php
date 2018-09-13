@@ -83,11 +83,9 @@
                         <div class="col-12">
                             <h3><label class="control-label" for="category"> Category </label></h3>
                             <select class="select2 select2-multiple w-100" multiple id="category" name="category[]"   data-placeholder="Category">
-                             {{-- <option value="category 1" {{in_array('category 1' , old('category')) ? 'selected' : '' }} >category 1</option> --}}
-                             <option value="category 12">category 2</option>
-                             <option value="category 13">category 3</option>
-                             <option value="category 14">category 4</option>
-                             <option value="category 16">category 5</option>
+                            @foreach (App\Category::all() as $category)
+                                    <option value="{{ $category->id }}" @unless(is_null( old('category') )) {{ in_array( $category->id , old('category')) ? 'selected' : '' }} @endunless }}>{{ $category->name }}</option>
+                            @endforeach
                             </select>
                             @if ($errors->has('category'))
                                 <span class="form-control-feedback" role="alert">

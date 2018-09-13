@@ -20,6 +20,23 @@ class UsersTableSeeder extends Seeder
         
         $user->assignRole('super-admin');
 
+        $user = App\User::create([
+            'name' => 'THE Shopkeeper',
+            'email' => 'shop@shop.com',
+            'password' => bcrypt('1234')
+
+        ]);
+        
+        $user->assignRole('shopkeeper');
+
+        $user = App\User::create([
+            'name' => 'THE client',
+            'email' => 'client@client.com',
+            'password' => bcrypt('1234')
+
+        ]);
+        
+        $user->assignRole('client');
 
         factory('App\User', 10)->create()->each(function($u){
             $u->assignRole('shopkeeper');

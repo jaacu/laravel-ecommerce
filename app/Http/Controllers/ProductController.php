@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\StoreProduct;
 
+use App\Tag;
 class ProductController extends Controller
 {
 
@@ -50,6 +51,15 @@ class ProductController extends Controller
     {
 
         $validated = $request->validated();
+        $tags = explode(',' , $validated['tags']);
+        $tags = array_map(function($item){
+            $item = studly_case($item);
+            $tag = Tag::whereName($item)->first();
+            if( is_null($tag) ){
+                $tag = Tag::create(['name' => $item]);
+            } 
+            return $tag->id;
+        } , $tags);
         $product = Product::create([
             'name' => $validated['name'],
             'description' => $validated['description'],
@@ -57,6 +67,8 @@ class ProductController extends Controller
             'price' => $validated['price'],
             'shop_id' => $request->user()->getShopId()
             ]);
+        $product->tags()->attach($tags);
+        $product->categories()->attach($validated['category']);
 
         return redirect(route('product.show', $product->id));
     }
@@ -69,6 +81,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $product->load(['categories' , 'tags']);
         return view('store.product.showSingle' , compact('product'));
     }
 

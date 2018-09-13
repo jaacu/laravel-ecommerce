@@ -27,7 +27,9 @@ class StoreProduct extends FormRequest
             'name' => 'required|string|min:5|max:255',
             'description' => 'required|string|min:50|max:500',
             'stock' => 'required|integer|min:1',
-            'price' => 'required|numeric|min:1'
+            'price' => 'required|numeric|min:1',
+            'tags' => 'nullable|string',
+            'category' => 'nullable|array|exists:categories,id',
         ];
     }
      

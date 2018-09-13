@@ -30,4 +30,12 @@ class Product extends Model
     public function getUser(){
         return $this->shop->user;
     }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function categories(){
+        return $this->belongsToMany(Category::class);
+    }
 }
