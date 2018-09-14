@@ -80,8 +80,6 @@ class ShopTests extends TestCase
 
         $response->assertSee($shop->name);       
 
-        if($shop->description)
-        $response->assertSee($shop->description);
     }
 
     public function testShopCreate(){

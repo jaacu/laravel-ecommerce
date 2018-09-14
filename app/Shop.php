@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Helpers\ModelHelper;
+
 class Shop extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, ModelHelper;
 
 
     /**
@@ -27,5 +29,25 @@ class Shop extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function getUserId(){
+        return $this->user->id;
+    }
+
+    /**
+     * Get the total stock of products in the shop
+     * @return int
+     */
+    public function getTotalStock() : int{
+        return $this->products->sum->stock;
+    }
+
+    /**
+     * Get the total of products int the shop
+     * @return int
+     */
+    public function getTotalProducts() : int{
+        return $this->products->count();
     }
 }

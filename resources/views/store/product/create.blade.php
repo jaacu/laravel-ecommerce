@@ -83,7 +83,7 @@
                         <div class="col-12">
                             <h3><label class="control-label" for="category"> Category </label></h3>
                             <select class="select2 select2-multiple w-100" multiple id="category" name="category[]"   data-placeholder="Category">
-                            @foreach (App\Category::all() as $category)
+                            @foreach ($categories as $category)
                                     <option value="{{ $category->id }}" @unless(is_null( old('category') )) {{ in_array( $category->id , old('category')) ? 'selected' : '' }} @endunless }}>{{ $category->name }}</option>
                             @endforeach
                             </select>
@@ -125,6 +125,7 @@ $("input[name='price']").TouchSpin({
     initval: 10,
     max:9999999.99,
     step: 10,
+    forcestepdivisibility: 'none',
     decimals: 2,
     boostat: 5,
     maxboostedstep: 10,

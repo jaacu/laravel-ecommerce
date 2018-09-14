@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Helpers\ModelHelper;
+
 class Product extends Model
 {
 
-    use SoftDeletes;
+    use SoftDeletes, ModelHelper;
 
 
     /**
@@ -20,7 +22,15 @@ class Product extends Model
      */
     protected $dates = ['deleted_at'];
 
+    /**
+     * All of the relationships to be touched.
+     *
+     * @var array
+     */
+    protected $touches = ['shop'];
     
+    // protected $with = ['tags' , 'categories'];
+
     protected $guarded = [];
 
     public function shop(){
@@ -37,5 +47,13 @@ class Product extends Model
 
     public function categories(){
         return $this->belongsToMany(Category::class);
+    }
+    
+    public function getShopId(){
+        return $this->shop->id;
+    }
+
+    public function getShopName(){
+        return $this->shop->name;
     }
 }

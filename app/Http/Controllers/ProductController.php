@@ -51,15 +51,6 @@ class ProductController extends Controller
     {
 
         $validated = $request->validated();
-        $tags = explode(',' , $validated['tags']);
-        $tags = array_map(function($item){
-            $item = studly_case($item);
-            $tag = Tag::whereName($item)->first();
-            if( is_null($tag) ){
-                $tag = Tag::create(['name' => $item]);
-            } 
-            return $tag->id;
-        } , $tags);
         $product = Product::create([
             'name' => $validated['name'],
             'description' => $validated['description'],
@@ -67,7 +58,11 @@ class ProductController extends Controller
             'price' => $validated['price'],
             'shop_id' => $request->user()->getShopId()
             ]);
-        $product->tags()->attach($tags);
+        if( isset($validated['tags']) ){
+            $tags = Tag::parseTags($validated['tags']);
+            $product->tags()->attach($tags);
+        }
+        if( isset($validated['category'] ) )
         $product->categories()->attach($validated['category']);
 
         return redirect(route('product.show', $product->id));

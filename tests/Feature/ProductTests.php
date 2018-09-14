@@ -10,7 +10,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Product;
 use App\Shop;
 use App\User;
-
+use App\Category;
+use App\Tag;
 class ProductTests extends TestCase
 {
     use DatabaseTransactions, WithFaker;
@@ -57,7 +58,6 @@ class ProductTests extends TestCase
             'description' => $this->faker->realText(),
             'stock' => $this->faker->numberBetween(1,20),
             'price' => $this->faker->randomFloat(2,10,1000000),
-            'shop_id' => $user->shop->id
         ];
 
         $response = $this->actingAs($user)
@@ -66,6 +66,33 @@ class ProductTests extends TestCase
         $product = Product::all()->last();
 
         $this->assertDatabaseHas('products', $data);
+
+    }
+
+    public function testProductCreateWithTagsAndCategories(){
+
+        $this->removeBadTestingMiddleware();
+
+        $user = $this->createShopkeeper();
+        auth()->login($user);
+
+        $data = [
+            'name' => 'Testing Name',//$this->faker->title,
+            'description' => $this->faker->realText(),
+            'stock' => $this->faker->numberBetween(1,20),
+            'price' => $this->faker->randomFloat(2,10,1000000),
+            'tags' => 'this,are,test,tags',
+            'category' => array_flatten(Category::all()->random(3)->pluck('id')) ,
+        ];
+
+        $response = $this->actingAs($user)
+                        ->post( route('product.store') , $data);
+        $product = Product::all()->last();
+
+        $this->assertDatabaseHas('products', array_except($data , ['tags' , 'category']));
+        $this->assertEquals( $data['category'] , array_flatten($product->categories->pluck('id')) );
+        $tags = Tag::parseTags($data['tags']);
+        $this->assertEquals( $tags , array_flatten($product->tags->pluck('id')) );
 
     }
 

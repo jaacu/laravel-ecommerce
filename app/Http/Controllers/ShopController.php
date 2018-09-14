@@ -64,7 +64,8 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
-        return $shop->load('products');
+        $shop->load('products');
+        return view('store.shop.showSingle' , compact('shop'));
     }
 
     /**

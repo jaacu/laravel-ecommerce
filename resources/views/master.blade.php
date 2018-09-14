@@ -47,7 +47,7 @@
     <!-- ============================================================== -->
     <!-- ============================================================== -->
 
-    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+    <script src="{{ asset('js/app.js') }}"></script>
     {{-- <script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script> --}}
     <script src="{{ url('assets/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ url('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
