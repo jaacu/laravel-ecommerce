@@ -10,6 +10,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Remove the middleware that interfere with testings
+     * @return void
      */
     public function removeBadTestingMiddleware(){
         

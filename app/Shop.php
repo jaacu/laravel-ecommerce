@@ -26,11 +26,17 @@ class Shop extends Model
     public function products(){
         return $this->hasMany(Product::class);
     }
-
+    /**
+     * Return the owner of this shop
+     * @return \App\User
+     */
     public function user(){
         return $this->belongsTo(User::class);
     }
-
+    /**
+     * Get this shop's owner id 
+     * @return int
+     */
     public function getUserId(){
         return $this->user->id;
     }
@@ -49,5 +55,21 @@ class Shop extends Model
      */
     public function getTotalProducts() : int{
         return $this->products->count();
+    }
+
+    /**
+     * Get the cheapest product
+     * @return int
+     */
+    public function getCheap(){
+        return $this->products->min->price;
+    }
+
+    /**
+     * Get the most expensive product
+     * @return int
+     */
+    public function getExpensive(){
+        return $this->products->max->price;
     }
 }

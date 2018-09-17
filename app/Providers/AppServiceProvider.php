@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Category;
+use App\Tag;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        /**
+         * Add the categories and the tags to all views
+         */
         view()->share('categories', Category::all());
+        view()->share('tags', Tag::all());
     }
 
     /**

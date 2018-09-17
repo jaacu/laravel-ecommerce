@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('mini-product', require('./components/miniProduct.vue'));
+Vue.component('products-masonry', require('./components/productsMasonry.vue'));
 
 const app = new Vue({
     el: '#main-wrapper'

@@ -13,11 +13,14 @@ class CreateShopsTable extends Migration
      */
     public function up()
     {
+        /**
+         * Create the shops table
+         */
         Schema::create('shops', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('description')->nullable()->default(null);
-            $table->unsignedInteger('user_id');
+            $table->text('description')->nullable()->default(null); //Optional description
+            $table->unsignedInteger('user_id'); // The user that owns this shop
             $table->softDeletes();
             $table->foreign('user_id')
                 ->references('id')

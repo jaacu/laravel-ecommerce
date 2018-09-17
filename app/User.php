@@ -29,9 +29,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * Return the shop associated with this user
+     * @return \App\Shop
+     */
     public function shop(){
         return $this->hasOne(Shop::class);
     }
+
     /**
      * Verifies if the shop belongs to this user
      * @param int $id
@@ -40,6 +45,7 @@ class User extends Authenticatable
     public function ownsShop($id) : bool{
         return ($this->hasShop() and $this->getShopId() === $id );
     }
+
     /**
      * Get the Shop's Id associated with this User
      * @return mixed
@@ -49,6 +55,7 @@ class User extends Authenticatable
             return $this->shop->id;
         else return null;
     }
+
     /**
      * Verifies if the user has a shop
      * @return bool

@@ -13,6 +13,9 @@ class AddShopForeignKeyOnProductsTable extends Migration
      */
     public function up()
     {
+        /**
+         * Add the foreign key of shop_id on the products table
+         */
         Schema::table('products', function (Blueprint $table) {
             $table->unsignedInteger('shop_id');
             $table->foreign('shop_id')

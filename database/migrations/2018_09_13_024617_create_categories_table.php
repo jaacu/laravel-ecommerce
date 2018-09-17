@@ -13,9 +13,12 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
+        /**
+         * Create the categories table
+         */
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('name')->unique(); //All categories have unique name and are created by the admin or predefined
             $table->timestamps();
         });
     }

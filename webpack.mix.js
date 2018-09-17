@@ -52,6 +52,8 @@ mix.js('resources/assets/minimal/js/custom.min.js', 'public/js')
       .styles('resources/assets/assets/plugins/multiselect/css/multi-select.css', 'public/css/multi-select.css')
       .styles('resources/assets/assets/plugins/bootstrap/css/bootstrap.min.css', 'public/css/bootstrap.min.css')      
       .styles('resources/assets/assets/plugins/select2/dist/css/select2.min.css', 'public/css/select2.min.css')      
+      .styles('resources/assets/assets/plugins/ion-rangeslider/css/ion.rangeSlider.css', 'public/css/ion.rangeSlider.css')      
+      .styles('resources/assets/assets/plugins/ion-rangeslider/css/ion.rangeSlider.skinModern.css', 'public/css/ion.rangeSlider.skinModern.css')      
       // Laravel default scss
       .sass('resources/assets/sass/app.scss', 'public/css/app.css')
       //Custom scss

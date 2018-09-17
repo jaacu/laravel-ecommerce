@@ -11,6 +11,7 @@
 |
 */
 
+//Temporary routes
 Route::get('/', function () {
     return view('store.home');
 });
@@ -19,12 +20,16 @@ Route::get('/dashboard', function(){
     return view('master');
 });
 
-Route::resource('user', 'UserController');
+/**
+ * The user, shop and product resources routes
+ */
+Route::resources([
+    'user' => 'UserController',
+    'product' => 'ProductController',
+    'shop' => 'ShopController'
+]);
 
-Route::resource('product', 'ProductController');
-
-Route::resource('shop', 'ShopController');
-
+//Test route -------- To delete later
 Route::get('/logout',function(){
     $user = App\User::all()->last();
     // $user->removeRole('shopkeeper');
@@ -36,5 +41,5 @@ Route::get('/logout',function(){
 
     return view('shared.errorsahhh');
 });
-
+//Auth routes
 Auth::routes();

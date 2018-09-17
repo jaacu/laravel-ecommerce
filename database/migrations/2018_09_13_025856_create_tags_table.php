@@ -13,9 +13,12 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
+        /**
+         * Create the tags table
+         */
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('name')->unique(); //All tags have unique name in studly case and are created by the users
             $table->timestamps();
         });
     }

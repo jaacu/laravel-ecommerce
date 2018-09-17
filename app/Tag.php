@@ -10,12 +10,17 @@ class Tag extends Model
     
     // protected $with=['products'];
     
+    /**
+     * Get the products with this tag
+     * @return \App\Product
+     */
     public function products(){
         return $this->hasMany(Product::class);
     }
     
     /**
      * Parse the tags string into and array of string in studly case
+     * And create them if the don't exists yet
      * @param string $tags
      * @return array
      */

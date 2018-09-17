@@ -24,20 +24,38 @@
     </div>
 </div>
 <div class="col-lg-12">
-    <div class="card-columns">
-    @forelse( $shop->products as $product )
-    <mini-product product="{{ $product }}" url="{{ route('product.show', $product->id) }}"></mini-product>
-    @empty
-        <h3>This shop does not have </h3>
-    @endforelse
-    </div>
+<products-masonry productsraw = "{{$shop->products->load(['tags' , 'categories']) }}" tagsraw="{{ $tags }}" categoriesraw="{{ $categories }}"></products-masonry>
 </div>
 @endsection
 
 @section('styles')
+<link rel="stylesheet" href="{{ asset('css/bootstrap-tagsinput.css') }}">   
+<link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
+<link rel="stylesheet" href="{{ url('assets/plugins/ion-rangeslider/css/ion.rangeSlider.css') }}">
+<link rel="stylesheet" href="{{ url('assets/plugins/ion-rangeslider/css/ion.rangeSlider.skinModern.css') }}">
 <style>
 .shop-description{
     font-size: 18px;
 }
 </style>
+@endsection
+
+@section('scripts')
+<script src="{{asset('js/bootstrap-tagsinput.min.js')}}"></script>
+<script src="{{asset('js/bootstrap-select.min.js')}}" type="text/javascript"></script>
+<script src="{{ url('assets/plugins/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js') }}"></script>
+@endsection
+
+@section('jQuery')
+$('#price_range').ionRangeSlider({
+    type: "double",
+    grid: true,
+    min: {{ $shop->getCheap() }},
+    max: {{ $shop->getExpensive() }},
+    from: 0,
+    to: {{ $shop->getExpensive() }},
+    prefix: "$",
+    keyboard: true,
+    max_postfix: '+'
+});
 @endsection

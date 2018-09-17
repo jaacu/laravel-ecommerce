@@ -29,7 +29,7 @@ class StoreProduct extends FormRequest
             'stock' => 'required|integer|min:1',
             'price' => 'required|numeric|min:1',
             'tags' => 'nullable|string',
-            'category' => 'nullable|array|exists:categories,id',
+            'category' => 'nullable|array|exists:categories,id',//Verifies that the categories exists in the category table
         ];
     }
      

@@ -13,6 +13,9 @@ class CreateCategoryProductTable extends Migration
      */
     public function up()
     {
+        /**
+         * Create the pivot table between categories and products
+         */
         Schema::create('category_product', function (Blueprint $table) {
             $table->integer('category_id');
             $table->integer('product_id');

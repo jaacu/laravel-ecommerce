@@ -33,5 +33,7 @@
     "/css/jquery.bootstrap-touchspin.min.css": "/css/jquery.bootstrap-touchspin.min.css",
     "/css/multi-select.css": "/css/multi-select.css",
     "/css/bootstrap.min.css": "/css/bootstrap.min.css",
-    "/css/select2.min.css": "/css/select2.min.css"
+    "/css/select2.min.css": "/css/select2.min.css",
+    "/css/ion.rangeSlider.css": "/css/ion.rangeSlider.css",
+    "/css/ion.rangeSlider.skinModern.css": "/css/ion.rangeSlider.skinModern.css"
 }

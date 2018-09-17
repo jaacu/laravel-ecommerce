@@ -13,6 +13,9 @@ class CreateProductTagTable extends Migration
      */
     public function up()
     {
+        /**
+         * Create the pivot table between products and tags
+         */
         Schema::create('product_tag', function (Blueprint $table) {
             $table->integer('product_id');
             $table->integer('tag_id');

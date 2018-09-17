@@ -11,6 +11,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        /**
+         * Create the super-admin user
+         */
         $user = App\User::create([
             'name' => 'Javier',
             'email' => 'email@example.com',
@@ -20,6 +23,9 @@ class UsersTableSeeder extends Seeder
         
         $user->assignRole('super-admin');
 
+        /**
+         * Create the demo shopkeeper
+         */
         $user = App\User::create([
             'name' => 'THE Shopkeeper',
             'email' => 'shop@shop.com',
@@ -28,7 +34,10 @@ class UsersTableSeeder extends Seeder
         ]);
         
         $user->assignRole('shopkeeper');
-
+        
+        /**
+         * Create the demo client
+         */
         $user = App\User::create([
             'name' => 'THE client',
             'email' => 'client@client.com',
@@ -38,9 +47,11 @@ class UsersTableSeeder extends Seeder
         
         $user->assignRole('client');
 
+        // Create 10 shopkeepers
         factory('App\User', 10)->create()->each(function($u){
             $u->assignRole('shopkeeper');
         });
+        // Create 10 clients
         factory('App\User', 10)->create()->each(function($u){
             $u->assignRole('client');
         });

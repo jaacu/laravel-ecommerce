@@ -28,7 +28,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        $products = Product::with(['tags' , 'categories'])->paginate(15);
+        return view('store.product.index', compact('products'));
     }
 
     /**
@@ -58,10 +59,12 @@ class ProductController extends Controller
             'price' => $validated['price'],
             'shop_id' => $request->user()->getShopId()
             ]);
+            // If there are any tags, parse them and attach them to the product
         if( isset($validated['tags']) ){
             $tags = Tag::parseTags($validated['tags']);
             $product->tags()->attach($tags);
         }
+            // If there are any categories, attach them to the product
         if( isset($validated['category'] ) )
         $product->categories()->attach($validated['category']);
 

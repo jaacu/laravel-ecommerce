@@ -10,6 +10,10 @@ class Category extends Model
 
     // protected $with=['products'];
 
+    /**
+     * Get the products in this category
+     * @return \App\Product
+     */
     public function products(){
         return $this->hasMany(Product::class);
     }
