@@ -23,9 +23,14 @@ class Shop extends Model
 
     protected $guarded = [];
 
+    /**
+     * Return the products of this shop
+     * @return \App\Product
+     */
     public function products(){
         return $this->hasMany(Product::class);
     }
+
     /**
      * Return the owner of this shop
      * @return \App\User
@@ -33,6 +38,27 @@ class Shop extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get this shop tags
+     * @return \App\Tag
+     */
+    public function getTags(){
+        return $this->products()->with('tags')->get()->flatMap(function( $product ){
+            return $product->tags;
+        })->unique('id');
+    }
+
+    /**
+     * Get this shop categories
+     * @return \App\Category
+     */
+    public function getCategories(){
+        return $this->products()->with('categories')->get()->flatMap(function( $product ){
+            return $product->categories;
+        })->unique('id');
+    }
+
     /**
      * Get this shop's owner id 
      * @return int

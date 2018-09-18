@@ -13,7 +13,9 @@
 
 //Temporary routes
 Route::get('/', function () {
-    return view('store.home');
+    $products = App\Product::with('tags', 'categories')->get();
+    $shops = App\Shop::with('products')->get();
+    return view('store.home' , compact('products' , 'shops'));
 });
 
 Route::get('/dashboard', function(){
@@ -31,11 +33,13 @@ Route::resources([
 
 //Test route -------- To delete later
 Route::get('/logout',function(){
-    $user = App\User::all()->last();
+    dump(App\Category::all());
+    dd(App\Shop::first()->getCategories());
+    // $user = App\User::all()->last();
     // $user->removeRole('shopkeeper');
-    dump($user->getRoleNames());
-    $user->assignRole(3);
-    dump($user->getRoleNames());
+    // dump($user->getRoleNames());
+    // $user->assignRole(3);
+    // dump($user->getRoleNames());
     // dd($user->email);
 
 

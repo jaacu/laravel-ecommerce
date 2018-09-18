@@ -29,6 +29,7 @@
                 @includeWhen($errors->any() , 'shared.errors')
 
                     @yield('content')
+
                 </div>
                 <!-- Row -->
             </div>
@@ -48,7 +49,6 @@
     <!-- ============================================================== -->
 
     <script src="{{ asset('js/app.js') }}"></script>
-    {{-- <script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script> --}}
     <script src="{{ url('assets/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ url('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ url('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -57,7 +57,6 @@
     <script src="{{ asset('js/sidebarmenu.js')}}"></script>
     <script src="{{asset('js/sticky-kit.min.js')}}"></script>
     <script src="{{ url('assets/js/custom.js') }}"></script>
-    {{-- <script src="{{ asset('js/custom.js')}}" type="text/javascript"></script> --}}
     <script src="{{ asset('js/customMain.js')}}" type="text/javascript"></script>
 
     @yield('scripts')
@@ -68,23 +67,6 @@
             @yield('jQuery')
         });
     </script>
-    <script>
-
-    </script>
-    {{-- <!-- ============================================================== -->
-    <!-- This page plugins -->
-    <!-- ============================================================== --> --}}
-    <!-- chartist chart -->
-    {{-- <script src="../assets/plugins/chartist-js/dist/chartist.min.js"></script> --}}
-    {{-- <script src="../assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script> --}}
-    {{-- <!-- Chart JS --> --}}
-    {{-- <script src="../assets/plugins/echarts/echarts-all.js"></script> --}}
-    {{-- <!-- Chart JS --> --}}
-    {{-- <script src="js/dashboard1.js"></script> --}}
-    <!-- ============================================================== -->
-    <!-- Style switcher -->
-    <!-- ============================================================== -->
-    {{-- <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script> --}}
 
 </body>
 </html>

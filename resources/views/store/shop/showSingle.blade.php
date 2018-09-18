@@ -24,7 +24,7 @@
     </div>
 </div>
 <div class="col-lg-12">
-<products-masonry productsraw = "{{$shop->products->load(['tags' , 'categories']) }}" tagsraw="{{ $tags }}" categoriesraw="{{ $categories }}"></products-masonry>
+<products-masonry productsraw = "{{$shop->products->load(['tags' , 'categories']) }}" categoriesraw="{{ $shop->getCategories() }}"></products-masonry>
 </div>
 @endsection
 

@@ -27,24 +27,27 @@
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->
-    <!-- All Jquery -->
+    
     <script src="{{ asset('js/app.js') }}"></script>
-    <!-- ============================================================== -->
-    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="{{ url('assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url('assets/plugins/bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ url('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/jquery.slimscroll.js') }}"></script>
-    <!--Wave Effects -->
     <script src="{{ asset('js/waves.js') }}"></script>
-    <!--Menu sidebar -->
     <script src="{{ asset('js/sidebarmenu.js')}}"></script>
-
-    <script src="{{ asset('js/custom.js')}}" type="text/javascript"></script>
-
-    {{-- <script src="{{ asset('js/validation.js')}}" type="text/javascript"></script> --}}
-
+    <script src="{{asset('js/sticky-kit.min.js')}}"></script>
+    <script src="{{ url('assets/js/custom.js') }}"></script>
     <script src="{{ asset('js/customMain.js')}}" type="text/javascript"></script>
 
-
     @yield('scripts')
+    {{-- Global Document Ready Function --}}
+    <script>
+
+        jQuery(document).ready(function() {
+            @yield('jQuery')
+        });
+    </script>
+    
 
 
 </body>

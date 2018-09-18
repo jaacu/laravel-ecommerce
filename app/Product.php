@@ -27,7 +27,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $touches = ['shop'];
+    protected $touches = ['shop' , 'tags' , 'categories'];
     
     // protected $with = ['tags' , 'categories'];
 

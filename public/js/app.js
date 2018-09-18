@@ -31340,10 +31340,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['productsraw', 'tagsraw', 'categoriesraw'],
+    props: ['productsraw', 'categoriesraw'],
     created: function created() {
         this.products = JSON.parse(this.productsraw); //Parse the products string to json
-        this.tags = JSON.parse(this.tagsraw); //Parse the tags string to json
         this.categories = JSON.parse(this.categoriesraw); //Parse the categories string to json
         this.productsFiltered = this.products; //Copy the products to the filtered products array
         this.sortByDate(); // Sort the array by latest by default
@@ -31352,7 +31351,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             products: {},
             productsFiltered: [],
-            tags: {},
             categories: {},
             selectedTags: '',
             selectedCategories: [],
@@ -31560,30 +31558,7 @@ var render = function() {
     "div",
     { staticClass: "col-lg-12" },
     [
-      _c("h3", { staticClass: "text-center" }, [
-        _c(
-          "a",
-          {
-            attrs: {
-              "data-toggle": "collapse",
-              href: "#filter",
-              "aria-expanded": "false",
-              "aria-controls": "filter"
-            },
-            on: {
-              "~click": function($event) {
-                return _vm.setUpFilters($event)
-              }
-            }
-          },
-          [
-            _c("i", {
-              staticClass: " fa fa-filter ",
-              attrs: { "data-toggle": "tooltip", title: "Filters" }
-            })
-          ]
-        )
-      ]),
+      _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "collapse", attrs: { id: "filter" } }, [
         _c("div", { staticClass: "row my-3 form-group" }, [
@@ -31635,7 +31610,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _vm._m(1),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-4 col-sm-6" }, [
             _c("input", {
@@ -31675,7 +31650,7 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _vm._m(1),
+          _vm._m(2),
           _vm._v(" "),
           _c(
             "div",
@@ -31786,6 +31761,30 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "text-center" }, [
+      _c(
+        "a",
+        {
+          attrs: {
+            "data-toggle": "collapse",
+            href: "#filter",
+            "aria-expanded": "false",
+            "aria-controls": "filter"
+          }
+        },
+        [
+          _c("i", {
+            staticClass: " fa fa-filter ",
+            attrs: { "data-toggle": "tooltip", title: "Filters" }
+          })
+        ]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

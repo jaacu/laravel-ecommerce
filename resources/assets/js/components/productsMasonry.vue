@@ -1,6 +1,6 @@
 <template>
     <div class="col-lg-12">
-        <h3 class="text-center"><a data-toggle="collapse" @click.once="setUpFilters" href="#filter" aria-expanded="false" aria-controls="filter"><i class=" fa fa-filter " data-toggle="tooltip" title="Filters"></i></a></h3>
+        <h3 class="text-center"><a data-toggle="collapse" href="#filter" aria-expanded="false" aria-controls="filter"><i class=" fa fa-filter " data-toggle="tooltip" title="Filters"></i></a></h3>
         <div class="collapse" id="filter">
             <div class="row my-3 form-group">
                 <div class="col-lg-4 col-sm-6">
@@ -61,10 +61,9 @@
 
 <script>
     export default {
-        props:['productsraw', 'tagsraw' , 'categoriesraw'],
+        props:['productsraw', 'categoriesraw'],
         created() {
             this.products = JSON.parse(this.productsraw) //Parse the products string to json
-            this.tags = JSON.parse(this.tagsraw) //Parse the tags string to json
             this.categories = JSON.parse(this.categoriesraw) //Parse the categories string to json
             this.productsFiltered = this.products //Copy the products to the filtered products array
             this.sortByDate(); // Sort the array by latest by default
@@ -73,7 +72,6 @@
             return {
                 products: {},
                 productsFiltered: [],
-                tags : {},
                 categories:  {},
                 selectedTags: '',
                 selectedCategories: [],
