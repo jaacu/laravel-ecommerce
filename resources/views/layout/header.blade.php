@@ -234,6 +234,55 @@
             <!-- User profile and search -->
             <!-- ============================================================== -->
             <ul class="navbar-nav my-lg-0">
+                @auth
+                    @if ( auth()->user()->hasShoppingCart() )
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" id="cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-cart"></i>
+                                @if( session()->has('cart-changed') ) <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div> @endif
+                            </a>
+                            <div class="dropdown-menu mailbox animated bounceInDown" aria-labelledby="cart">
+                                <ul>
+                                   @forelse ( auth()->user()->shoppingCart->products as $p)
+                                   @if ($loop->first)
+                                    <li>
+                                        <div class="drop-title">You have {{ auth()->user()->shoppingCart->totalCount() }} item(s) in your cart</div>
+                                    </li>
+                                    <div class="message-center">
+                                    @endif
+                                        <a class="" href="{{ route('product.show',$p->id) }}">
+                                            <div class="user-img"> <img src="{{asset('assets/images/big/img3.jpg')}}" alt="{{ $p->name . '_image'}}" class="img-circle"> </div>
+                                            <div class="mail-contnet">
+                                                <h5>{{ $p->name }}</h5>  <span class="mail-desc">{{ $p->description }}</span>   <span class="time"> {{ $p->order->amount}} Units</span> 
+                                            </div>
+                                        </a>
+                                    @if ($loop->last)                                
+                                    </div>
+                                    <li>
+                                    <a class="nav-link text-center" href="{{ route('cart.show') }}"> <strong>Go to cart</strong> <i class="fa fa-angle-right"></i> </a>
+                                    </li>
+                                    @endif
+                                    @empty
+                                    <li>
+                                        <div class="drop-title">You don't have items in your cart!</div>                                      
+                                    </li>
+                                    @endforelse   
+                                </ul>
+                            </div>
+                    </li>  
+                    @else
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" id="cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-cart-outline"></i>
+                            </a>
+                            <div class="dropdown-menu mailbox animated bounceInDown" aria-labelledby="cart">
+                                <ul>
+                                    <li>
+                                        <div class="drop-title">You don't have items in your cart!</div>
+                                    </li>
+                                </ul>
+                            </div>
+                    </li>
+                    @endif
+                @endauth
                 <li class="nav-item hidden-sm-down">
                     <form class="app-search">
                         <input type="text" class="form-control" placeholder="Search for..."> <a class="srh-btn"><i class="ti-search"></i></a> </form>
@@ -249,15 +298,19 @@
                                         <div class="u-text">
                                                 <h4>{{ auth()->user()->name }}</h4>
                                                 <p class="text-muted">{{ auth()->user()->email }}</p>
-                                                @if ( auth()->user()->hasShop() )
-                                                <a href="{{ route('shop.show', auth()->user()->getShopId()) }}" class="btn btn-rounded btn-danger btn-sm">View My Shop</a>
-                                                @else
-                                                <a href="{{ route('shop.create') }}" class="btn btn-rounded btn-danger btn-sm">Create Your Shop!</a>                                        
+                                                @if ( auth()->user()->hasRole('shopkeeper') )                                                    
+                                                    @if ( auth()->user()->hasShop() )
+                                                    <a href="{{ route('shop.show', auth()->user()->getShopId()) }}" class="btn btn-rounded btn-danger btn-sm">View My Shop</a>
+                                                    @else
+                                                    <a href="{{ route('shop.create') }}" class="btn btn-rounded btn-danger btn-sm">Create Your Shop!</a>                                        
+                                                    @endif
                                                 @endif
+
                                             </div>
                                     </div>
                                 </li>
                                 @includeWhen( auth()->user()->hasRole('shopkeeper'), 'role.shopkeeper.partials.HeaderDropdown', ['user' => auth()->user() ])
+                                @includeWhen( auth()->user()->hasRole('client'), 'role.client.partials.HeaderDropdown', ['user' => auth()->user() ])
                                 <li role="separator" class="divider"></li>
                                 <li>
                                 <a href="logout" class="link logoutButton" data-toggle="tooltip" title="Logout"><i class="fa fa-power-off"></i> Logout</a>

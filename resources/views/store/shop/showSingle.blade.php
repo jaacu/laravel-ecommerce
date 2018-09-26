@@ -24,7 +24,7 @@
     </div>
 </div>
 <div class="col-lg-12">
-<products-masonry productsraw = "{{$shop->products->load(['tags' , 'categories']) }}" categoriesraw="{{ $shop->getCategories() }}"></products-masonry>
+<products-masonry productsraw = "{{$shop->products->load(['tags' , 'categories']) }}" categoriesraw="{{ $shop->getCategories() }}" authcart="{{ auth()->check() ? auth()->user()->hasShoppingCart() ? auth()->user()->shoppingCart->products: null  : null }}"></products-masonry>
 </div>
 @endsection
 

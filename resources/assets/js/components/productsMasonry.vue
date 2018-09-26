@@ -34,7 +34,7 @@
         </transition>
         <div class="card-columns product-grid">
             <transition-group appear name="fade-slide" mode="in-out">
-            <mini-product v-for="(product) in productsFiltered" :key="product.id" :product="product" ></mini-product>
+            <mini-product v-for="(product) in productsFiltered" :key="product.id" :product="product" @AddCart="addToCartModal" :cart="cart" ></mini-product>
             </transition-group>
         </div>
     </div>
@@ -61,11 +61,13 @@
 
 <script>
     export default {
-        props:['productsraw', 'categoriesraw'],
+        props:['productsraw', 'categoriesraw' , 'authcart'],
         created() {
             this.products = JSON.parse(this.productsraw) //Parse the products string to json
             this.categories = JSON.parse(this.categoriesraw) //Parse the categories string to json
             this.productsFiltered = this.products //Copy the products to the filtered products array
+            if(this.authcart !== '')
+            this.cart = JSON.parse(this.authcart) //Parse the the products in cart if the user is login
             this.sortByDate(); // Sort the array by latest by default
         },
         data(){
@@ -78,6 +80,7 @@
                 selectedName: '',
                 orderByDateAsc: false,
                 orderByDateAscMsg: '',
+                cart: {}
             }
         },
         computed: {
@@ -195,6 +198,15 @@
             //Shuffle the products, just for fun
             shuffle(){
                 this.productsFiltered = _.shuffle(this.productsFiltered)
+            },
+            /**
+             * The event handler to the AddCart event from the child component
+             * Load the modal placeholder with the modal for adding the product generating the event to the cart 
+             */
+            addToCartModal(product){
+                $('#modalPlaceholder').load('/cart/add?id=' + product.id , function(){
+                    $('#modalPlaceholder').modal()
+                })
             }
         }
     }

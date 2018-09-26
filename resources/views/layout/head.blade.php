@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 <link rel="stylesheet" href="{{ asset('css/template.css') }}">
+<link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}">
 <link href="{{ asset('css/colors/green-dark.css') }}" id="theme" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 @yield('styles')

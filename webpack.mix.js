@@ -18,6 +18,7 @@ mix.js('resources/assets/minimal/js/custom.min.js', 'public/js')
       .js('resources/assets/minimal/js/waves.js', 'public/js')
       // .js('resources/assets/minimal/js/validation.js', 'public/js')
       .js('resources/assets/minimal/js/sidebarmenu.js', 'public/js')
+      .js('resources/assets/minimal/js/jquery.PrintArea.js', 'public/js')
       //plugins
       .js('resources/assets/assets/plugins/jquery/jquery.min.js', 'public/js')
       .js('resources/assets/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js', 'public/js')
@@ -53,7 +54,9 @@ mix.js('resources/assets/minimal/js/custom.min.js', 'public/js')
       .styles('resources/assets/assets/plugins/bootstrap/css/bootstrap.min.css', 'public/css/bootstrap.min.css')      
       .styles('resources/assets/assets/plugins/select2/dist/css/select2.min.css', 'public/css/select2.min.css')      
       .styles('resources/assets/assets/plugins/ion-rangeslider/css/ion.rangeSlider.css', 'public/css/ion.rangeSlider.css')      
-      .styles('resources/assets/assets/plugins/ion-rangeslider/css/ion.rangeSlider.skinModern.css', 'public/css/ion.rangeSlider.skinModern.css')      
+      .styles('resources/assets/assets/plugins/ion-rangeslider/css/ion.rangeSlider.skinModern.css', 'public/css/ion.rangeSlider.skinModern.css') 
+      .styles('resources/assets/assets/plugins/wizard/steps.css', 'public/css/steps.css')
+      .styles('resources/assets/assets/plugins/sweetalert/sweetalert.css', 'public/css/sweetalert.css')
       // Laravel default scss
       .sass('resources/assets/sass/app.scss', 'public/css/app.css')
       //Custom scss

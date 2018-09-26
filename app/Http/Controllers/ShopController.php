@@ -19,6 +19,7 @@ class ShopController extends Controller
     {
         $this->middleware([ 'auth' , 'role:shopkeeper' , 'shopkeeperMiddleware'])->except(['index' , 'show']);
     }
+    
     /**
      * Display a listing of the resource.
      *

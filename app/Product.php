@@ -66,6 +66,14 @@ class Product extends Model
     }
     
     /**
+     * Get the carts this products is in
+     * @return \App\ShoppingCart
+     */
+    public function shoppingcarts(){
+        return $this->belongsToMany(ShoppingCart::class);
+    }
+
+    /**
      * Get this product's shop id
      * @return int
      */
@@ -80,4 +88,5 @@ class Product extends Model
     public function getShopName(){
         return $this->shop->name;
     }
+
 }

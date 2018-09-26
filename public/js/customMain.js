@@ -60,30 +60,36 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 89);
+/******/ 	return __webpack_require__(__webpack_require__.s = 91);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 89:
+/***/ 91:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(90);
+module.exports = __webpack_require__(92);
 
 
 /***/ }),
 
-/***/ 90:
+/***/ 92:
 /***/ (function(module, exports) {
 
 
 $(function () {
-    $('.logoutButton').click(function (e) {
-        $('#logoutForm').submit();
-        e.preventDefault();
-    });
+  /**
+   * A global logout form submit for the repeated logout buttons in the navbar, sidebar, etc.
+   */
+  $('.logoutButton').click(function (e) {
+    $('#logoutForm').submit();
+    e.preventDefault();
+  });
 
-    $('#errorNotification').delay(500).slideDown().delay(5000).slideUp();
+  /**
+   * Show the notification after the page is loaded then hide after 5 seconds with animations 
+   */
+  $('.normal-notification').delay(500).slideDown().delay(5000).slideUp();
 });
 
 /***/ })

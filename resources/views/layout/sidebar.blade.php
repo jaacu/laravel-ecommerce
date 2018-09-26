@@ -22,6 +22,9 @@
             <ul id="sidebarnav">
                 {{-- <li class="nav-small-cap">Categories</li> --}}
                 <li>
+                    <a  href="{{ route('product.index') }}" aria-expanded="false"><i class="mdi mdi-pig"></i><span class="hide-menu">Products </span></a>
+                </li>
+                <li>
                 <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-folder-multiple"></i><span class="hide-menu">Categories <span class="label label-rounded label-success">{{ $categories->count()}}</span></span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li> <a class="has-arrow" href="#" aria-expanded="false"> <i class="mdi mdi-folder-star"></i> Most Used</a>

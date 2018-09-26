@@ -15,7 +15,7 @@
         </div>
 </div>
 <div class="col-lg-12">
-<products-masonry productsraw = "{{ collect($products->items() ) }}" tagsraw="{{ $tags }}" categoriesraw="{{ $categories }}"></products-masonry>
+<products-masonry productsraw = "{{ collect($products->items() ) }}" tagsraw="{{ $tags }}" categoriesraw="{{ $categories }}" authcart="{{ auth()->check() ? auth()->user()->hasShoppingCart() ? auth()->user()->shoppingCart->products: null  : null }}" ></products-masonry>
 </div>
 <div class="col-lg-12">
     <div class="text-left pull-right">

@@ -38,6 +38,28 @@ class User extends Authenticatable
     }
 
     /**
+     * Return this user shopping cart
+     * @return \App\ShoppingCart
+     */
+    public function shoppingCart(){
+        return $this->hasOne(ShoppingCart::class);
+    }
+
+    /**
+     * Return this user checkout info
+     * @return \App\checkout
+     */
+    public function checkout(){
+        return $this->hasOne(Checkout::class);
+    }
+
+    /**
+     * Verifies if the user has a shopping cart
+     * @return bool
+     */
+    public function hasShoppingCart() : bool{ return ! is_null( $this->shoppingCart );  }
+
+    /**
      * Verifies if the shop belongs to this user
      * @param int $id
      * @return bool
@@ -61,4 +83,29 @@ class User extends Authenticatable
      * @return bool
      */
     public function hasShop() : bool { return ! is_null( $this->shop ); }
+
+    /**
+     * Verifies if the user has a checkout info
+     * @return bool
+     */
+    public function hasCheckout() : bool { return ! is_null( $this->checkout ); }
+
+    /**
+     * Check if the given product id belongs to this cart
+     * 
+     * @param int $id
+     * @return bool
+     */
+    public function shoppingCartHasProduct($id) : bool{
+        return $this->hasShoppingCart() ?  $this->shoppingCart->products->contains($id) : false;
+    }
+    
+    /**
+     * Check if the cart is empty
+     * 
+     * @return bool
+     */
+    public function isShoppingCartEmpty() : bool{
+        return $this->hasShoppingCart() ?  $this->shoppingCart->products->isEmpty() : false;
+    }
 }

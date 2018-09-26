@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="col-lg-7 col-sm-12 border">
-        <h1 class="text-center"> {{ $product->name}} </h1>
+        <h1 class="text-center"> {{ $product->name}} @if( auth()->check() && auth()->user()->shoppingCartHasProduct($product->id) ) <small class="badge badge-inverse badge-pill in-cart"> In Cart </small>  @endif</h1>
         <hr>
         <h3 class="text-center"><i class=" fa fa-list-alt product-icon " data-toggle="tooltip" title="Description"></i></h3>
         <p class="text-justify p-3">{{ $product->description}}</p>
@@ -37,6 +37,11 @@
                 @empty
                     <h4 class="text-center"> This product doesn't have categories.</h4>
                 @endforelse
+            </div>
+            <div class="col-sm-12 border py-2 text-center"><button class="btn btn-outline-primary btn-md btn-rounded waves-effect waves-dark modal-load-button" data-url="{{ route('cart.add') }}" data-id="{{ $product->id}}" >Add to cart</button>
+            @if( auth()->check() && auth()->user()->shoppingCartHasProduct($product->id) )
+            <button  class="btn btn-outline-danger btn-md btn-rounded waves-effect waves-dark modal-load-button" data-url="{{ route('cart.delete') }}" data-id="{{ $product->id }}"> Remove from cart </button>  
+             @endif
             </div>
         </div>
     </div>

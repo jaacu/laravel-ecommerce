@@ -22,6 +22,7 @@
     "/js/bootstrap-select.min.js": "/js/bootstrap-select.min.js",
     "/js/waves.js": "/js/waves.js",
     "/js/jquery.slimscroll.js": "/js/jquery.slimscroll.js",
+    "/js/jquery.PrintArea.js": "/js/jquery.PrintArea.js",
     "/js/customMain.js": "/js/customMain.js",
     "/js/sticky-kit.min.js": "/js/sticky-kit.min.js",
     "/js/jquery.multi-select.js": "/js/jquery.multi-select.js",
@@ -35,5 +36,7 @@
     "/css/bootstrap.min.css": "/css/bootstrap.min.css",
     "/css/select2.min.css": "/css/select2.min.css",
     "/css/ion.rangeSlider.css": "/css/ion.rangeSlider.css",
-    "/css/ion.rangeSlider.skinModern.css": "/css/ion.rangeSlider.skinModern.css"
+    "/css/ion.rangeSlider.skinModern.css": "/css/ion.rangeSlider.skinModern.css",
+    "/css/steps.css": "/css/steps.css",
+    "/css/sweetalert.css": "/css/sweetalert.css"
 }

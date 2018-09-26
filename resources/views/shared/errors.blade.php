@@ -1,4 +1,4 @@
-<div id="errorNotification" class="col-12 notification hide">
+<div id="errorNotification" class="col-12 notification normal-notification hide">
     <div class="col-lg-7 col-md-12 mx-auto col-7">
         <div class="alert alert-danger">        
         @foreach ( $errors->all() as $error )

@@ -4,14 +4,16 @@
         <img class="card-img-top product-image" src="/assets/images/background/socialbg.jpg" alt="Product" data-toggle="tooltip" :title="price">
         </a>
         <div class="card-body"><br>
-            <small class="text-left text-muted pull-left" >{{ date.toDateString() }}</small> <br>
+            <small class="text-left text-muted pull-left" >{{ date.toDateString() }}</small>
+             <button v-if="showInCart" @click="emitAddCart" @mouseover="changeMessage" @mouseout="changeMessageBack" class="btn btn-outline-primary pull-right btn-sm waves-effect waves-dark">{{ cartmessage }}</button>
+             <button v-if="!showInCart" @click="emitAddCart" class="btn btn-outline-primary pull-right btn-sm waves-effect waves-dark">Add to Cart</button>
             <h4 class="card-title">
                 <a :href="url" class="link">{{ product.name }}</a>
-                <a tab-index="0" v-show="product.categories.length != 0" class="category link text-muted" data-container="body" title="Categories"
+                <a tab-index="0" v-if="product.categories.length != 0" class="category link text-muted" data-container="body" title="Categories"
                  data-toggle="popover" data-html="true" data-placement="top" :data-content="categories" data-trigger="focus click">
                  <i class="fa fa-folder "></i></a>
 
-                <a tab-index="0" v-show="product.categories.length == 0" class="category link text-muted" data-toggle="tooltip" title="This product is not in any category!" >
+                <a tab-index="0" v-if="product.categories.length == 0" class="category link text-muted" data-toggle="tooltip" title="This product is not in any category!" >
                  <i class="fa fa-folder-o "></i></a>
             </h4>
             <p class="card-text">{{ description }} <span v-show="showMore" @click="showDescription" class="text-info text-muted">Show More....</span> <span v-show="show">{{ rest }}</span>  </p>
@@ -37,13 +39,14 @@
 
 <script>
     export default {
-        props:['product'],
+        props:['product' , 'cart'], // The product and the products in the cart
         data(){
             return {
                 showMore : false,
                 show : false,
                 categories: '',
-                date: ''
+                date: '',
+                cartmessage: 'In Cart'
             }
         },
         // Add the categories to the popover content and parse the date to human-readable
@@ -76,6 +79,17 @@
             //the url for this product
             url(){
                 return '/product/' + this.product.id
+            },
+            //Verifies if this items is in the cart
+            showInCart(){
+                self = this
+                if( ! _.isEmpty(this.cart) ){
+                    var result = this.cart.find(function(item){
+                        return  item.id == self.product.id 
+                    })
+                } else return false
+
+                return result !== undefined
             }
         },
         methods: {
@@ -97,6 +111,18 @@
                  e.target.className = ' fa fa-tag '
                  else
                  e.target.firstChild.className = ' fa fa-tag '
+            },
+            // Emit a event to the parent component when the add to cart button is clicked and send this product properties
+            emitAddCart(){
+                this.$emit('AddCart', this.product)
+            },
+            //Change the add to cart button on hover 
+            changeMessage(){
+                this.cartmessage = 'Add more'
+            },
+            //Change back the add to cart button
+            changeMessageBack(){
+                this.cartmessage = 'In cart'
             }
         }
     }
