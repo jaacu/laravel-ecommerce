@@ -16,5 +16,9 @@ goals-trello-stuff.txt
 auto-test.php
 /resources/assets/minimal
 /resources/assets/assets
-/public
+/public/assets
+/public/css
+/public/fonts
+/public/images
+/public/js
 storage
