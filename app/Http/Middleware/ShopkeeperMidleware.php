@@ -22,11 +22,11 @@ class ShopkeeperMidleware
         if( !$request->user()->hasShop() ){
             if($request->url() != route('shop.create') and 
                 $request->url() != route('shop.store') )
-            return redirect( route('shop.create') );
+            return redirect()->route('shop.create');
         } else {
             if($request->url() == route('shop.create') or
                 $request->url() == route('shop.store')  ){
-                    return redirect( route('shop.edit', $request->user()->getShopId() ) );
+                    return redirect()->route('shop.edit', $request->user()->getShopId() );
             }
         }
 

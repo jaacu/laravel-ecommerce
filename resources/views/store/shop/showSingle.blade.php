@@ -23,9 +23,19 @@
         </div>
     </div>
 </div>
+@if( $shop->products->isNotEmpty() )
 <div class="col-lg-12">
-<products-masonry productsraw = "{{$shop->products->load(['tags' , 'categories']) }}" categoriesraw="{{ $shop->getCategories() }}" authcart="{{ auth()->check() ? auth()->user()->hasShoppingCart() ? auth()->user()->shoppingCart->products: null  : null }}"></products-masonry>
+<products-masonry productsraw = "{{$shop->products->loadMissing(['tags' , 'categories']) }}" categoriesraw="{{ $shop->getCategories() }}" authcart="{{ auth()->check() ? auth()->user()->hasShoppingCart() ? auth()->user()->shoppingCart->products: null  : null }}"></products-masonry>
 </div>
+@else
+    @auth        
+    @if (auth()->user()->ownsShop($shop->id))
+    <div class="col-lg-6 text-center mx-auto my-3 p-2">
+    <a class="btn btn-outline-success btn-block btn-md" href="{{ route('product.create') }}">Add a New Product!</a>
+    </div>
+    @endif
+    @endauth
+@endif
 @endsection
 
 @section('styles')

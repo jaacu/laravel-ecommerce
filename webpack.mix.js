@@ -57,6 +57,7 @@ mix.js('resources/assets/minimal/js/custom.min.js', 'public/js')
       .styles('resources/assets/assets/plugins/ion-rangeslider/css/ion.rangeSlider.skinModern.css', 'public/css/ion.rangeSlider.skinModern.css') 
       .styles('resources/assets/assets/plugins/wizard/steps.css', 'public/css/steps.css')
       .styles('resources/assets/assets/plugins/sweetalert/sweetalert.css', 'public/css/sweetalert.css')
+      .styles('resources/assets/assets/plugins/Magnific-Popup-master/dist/magnific-popup.css', 'public/css/magnific-popup.css')
       // Laravel default scss
       .sass('resources/assets/sass/app.scss', 'public/css/app.css')
       //Custom scss

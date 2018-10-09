@@ -28,7 +28,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with(['tags' , 'categories'])->paginate(15);
+        $products = Product::withTrashed()->with(['tags' , 'categories'])->paginate(15);
         return view('store.product.index', compact('products'));
     }
 
@@ -68,7 +68,7 @@ class ProductController extends Controller
         if( isset($validated['category'] ) )
         $product->categories()->attach($validated['category']);
 
-        return redirect(route('product.show', $product->id));
+        return redirect()->route('product.show', $product->id);
     }
 
     /**
@@ -105,7 +105,7 @@ class ProductController extends Controller
     {
         $validated = $request->validated();
         $product->update($validated);
-        return route('product.show', $product->id);
+        return redirect()->route('product.show', $product->id);
     }
 
     /**

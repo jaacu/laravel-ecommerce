@@ -54,7 +54,7 @@ class ShopController extends Controller
             'description' => $validated['description'],
             'user_id' => $request->user()->id
         ]);
-        return redirect( route('shop.show' , $shop->id) );
+        return redirect()->route('shop.show' , $shop->id);
     }
 
     /**
@@ -65,7 +65,7 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
-        $shop->load('products');
+        $shop->loadMissing('products');
         return view('store.shop.showSingle' , compact('shop'));
     }
 
@@ -95,7 +95,7 @@ class ShopController extends Controller
         $validated = $request->validated();
         $shop->update($validated);
         // $shop->save();
-        return route('shop.show', $shop->id);
+        return redirect()->route('shop.show', $shop->id);
     }
 
     /**
@@ -122,7 +122,7 @@ class ShopController extends Controller
      */
     public function keepInMyShop(User $user , Shop $shop){
         if( $user->getShopId() !== $shop->id  )
-            return redirect( route('shop.edit' , $user->getShopId() ) );
+            return redirect()->route('shop.edit' , $user->getShopId() );
         return null;
     }           
 }

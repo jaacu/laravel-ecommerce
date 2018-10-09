@@ -26,6 +26,13 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+        /**
+         * Allows to visit softDeleted products (Out of Stock)
+         */
+        Route::bind('product', function ($value) {
+            return \App\Product::withTrashed()->findOrFail($value);
+        });
     }
 
     /**

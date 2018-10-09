@@ -57,6 +57,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
+        if( !$this->ownsInvoice($invoice) ) abort(404);
         return view('store.invoice.show', compact('invoice'));
     }
 
@@ -92,5 +93,18 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice)
     {
         //
+    }
+
+    /**
+     * Verifies if the invoice belongs to the authenticated user
+     * @param \App\Invoice
+     * @return bool
+     */
+    public function ownsInvoice($invoice) : bool{
+        /**
+         * TODO evaluate if this method should return bool 
+         * or if it should throw a 404, 401 or 403 http response instead
+         */
+        return ( auth()->user()->id == $invoice->user_id );
     }
 }

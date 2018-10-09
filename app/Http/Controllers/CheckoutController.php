@@ -28,7 +28,7 @@ class CheckoutController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(){
-        if( auth()->user()->isShoppingCartEmpty() ) return redirect( route('home') )->withErrors('Your cart is empty!'); 
+        if( auth()->user()->isShoppingCartEmpty() ) return redirect()->route('home')->withErrors('Your cart is empty!'); 
         return view('store.checkout.stepForm');
     }
 
@@ -45,7 +45,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request){
 
-        if( auth()->user()->isShoppingCartEmpty() ) return redirect( route('home') )->withErrors('Your cart is empty!'); 
+        if( auth()->user()->isShoppingCartEmpty() ) return redirect()->route('home')->withErrors('Your cart is empty!'); 
         
         $data = $request->validate([
             'firstName' => 'required|string|max:50',
@@ -107,6 +107,8 @@ class CheckoutController extends Controller
         //Update the products stock or delete them 
         foreach($cart->products as $product ){
             if( $product->order->amount  == $product->stock ){
+                $product->stock = 0;
+                $product->save();
                 $product->delete();
             } else {
                 $product->stock = $product->stock - $product->order->amount;
@@ -117,7 +119,7 @@ class CheckoutController extends Controller
         //Empty the shopping cart
         $cart->products()->detach();
         
-        return redirect( route('invoice.show' , $invoice) )->withSuccess('Checkout successfull!');
+        return redirect()->route('invoice.show' , $invoice)->withSuccess('Checkout successfull!');
     }
 
 }

@@ -28,7 +28,7 @@ class Shop extends Model
      * @return \App\Product
      */
     public function products(){
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class)->withTrashed(); //Make sure the softDeleted (Out of Stock) products are included
     }
 
     /**

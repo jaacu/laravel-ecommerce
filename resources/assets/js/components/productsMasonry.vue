@@ -4,7 +4,8 @@
         <div class="collapse" id="filter">
             <div class="row my-3 form-group">
                 <div class="col-lg-4 col-sm-6">
-                    <select name="categories[]" v-model="selectedCategories" id="categories" class="selectpicker w-100" multiple data-style="form-control btn-inverse text-white"   @change="filterProducts">
+                    <select name="categories[]" v-model="selectedCategories" id="categories" class="selectpicker w-100" multiple 
+                    data-style="form-control btn-inverse text-white" @change="filterProducts" data-title="Filter by Categories">
                         <option  v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
                     </select>
                 </div>
@@ -19,11 +20,16 @@
                     <input type="text" id="price_range">
                 </div>
                 <div class="col-lg-5 col-sm-4 text-center align-self-center my-2">
-                    <h6 class="btn " data-toggle="tooltip" title="Sort" @click="sortByDate"><i class="fa fa-sort icon-filter"></i>  {{ orderByDateAscMsg}} </h6> <br>
+                    <h6 class="btn " data-toggle="tooltip" title="Sort" @click="sortByDate"><i class="fa fa-sort icon-filter"></i>  {{ orderByDateAscMsg}} </h6>
+                    <br>
                     <h6 class="btn" data-toggle="tooltip" title="Shuffle!" @click="shuffle"><i class="fa fa-random icon-filter"></i> Shuffle!</h6>
+                    <br>
+                    <button @click="showDeleted = !showDeleted" class="btn waves-effect waves-dark"
+                    :class="{ 'btn-outline-secondary': showDeleted , 'btn-secondary': !showDeleted  }" 
+                    data-toggle="tooltip" title="Show products Out of Stock" ><i class="fa " :class="{ 'fa-check': showDeleted , 'fa-times': !showDeleted  }" ></i> Out of Stock</button>
                 </div>
                 <div class="col-lg-4 col-sm-6 mx-auto text-center align-self-center">
-                    <button @click="filterProducts" class="btn btn-outline-info btn-md" > <i class="fa fa-search icon-filter"></i> Filter </button>
+                    <button @click="filterProducts" class="btn btn-outline-info btn-md waves-effect waves-dark" > <i class="fa fa-search icon-filter"></i> Filter </button>
                 </div>
             </div>
         </div>
@@ -80,12 +86,20 @@
                 selectedName: '',
                 orderByDateAsc: false,
                 orderByDateAscMsg: '',
-                cart: {}
+                cart: {},
+                showDeleted: true
             }
         },
         computed: {
+            //Show a warning if the filter products array is empty
             showWarning(){
                 return this.productsFiltered.length == 0
+            },
+        },
+        watch: {
+            // Filter the products when this property changes
+            showDeleted: function(){
+                this.filterProducts()
             }
         },
         methods: {
@@ -100,8 +114,13 @@
                         self.selectedTags += ',' + text
                     } 
                 })
-                // console.log( 'this.selectedTags' , this.selectedTags , 'this.selectedCategories' , this.selectedCategories , 'this.selectedName' , this.selectedName )
-                    this.productsFiltered = this.products
+                this.productsFiltered = this.products
+
+                //Verifies to show the Deleted (Out of Stock) products
+                if( !this.showDeleted ){
+                    this.productsFiltered = this.productsFiltered.filter(this.isDeleted)
+                }
+
                     //If the filters aren't empty, filter the products
                 if( !(self.selectedTags.trim() == '' && self.selectedName.trim() == '') ){
                     var re = ".*" + self.selectedName.trim() + ".*";
@@ -207,6 +226,10 @@
                 $('#modalPlaceholder').load('/cart/add?id=' + product.id , function(){
                     $('#modalPlaceholder').modal()
                 })
+            },
+            // Verifies if the given product is deleted (Out of Stock)
+            isDeleted(product){
+                return product.deleted_at == null
             }
         }
     }

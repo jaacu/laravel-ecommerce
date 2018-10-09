@@ -29,6 +29,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // ---------------------- Relationships ----------------------
+
     /**
      * Return the shop associated with this user
      * @return \App\Shop
@@ -52,6 +54,8 @@ class User extends Authenticatable
     public function checkout(){
         return $this->hasOne(Checkout::class);
     }
+
+    // ---------------------- End Relationships ----------------------
 
     /**
      * Verifies if the user has a shopping cart

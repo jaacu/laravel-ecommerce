@@ -1,12 +1,18 @@
 <template>
     <div class="card text-center single-product">
         <a :href="url">
-        <img class="card-img-top product-image" src="/assets/images/background/socialbg.jpg" alt="Product" data-toggle="tooltip" :title="price">
+        <img class="card-img-top product-image" :class="{ 'blur': isDeleted }" src="/assets/images/background/socialbg.jpg" alt="Product" data-toggle="tooltip" :title="price">
         </a>
         <div class="card-body"><br>
             <small class="text-left text-muted pull-left" >{{ date.toDateString() }}</small>
-             <button v-if="showInCart" @click="emitAddCart" @mouseover="changeMessage" @mouseout="changeMessageBack" class="btn btn-outline-primary pull-right btn-sm waves-effect waves-dark">{{ cartmessage }}</button>
-             <button v-if="!showInCart" @click="emitAddCart" class="btn btn-outline-primary pull-right btn-sm waves-effect waves-dark">Add to Cart</button>
+            <span v-if="!isDeleted">
+                <button v-if="showInCart" @click="emitAddCart" @mouseover="changeMessage" @mouseout="changeMessageBack" class="btn btn-outline-primary pull-right btn-sm waves-effect waves-dark">{{ cartmessage }}</button>
+                <button v-if="!showInCart" @click="emitAddCart" class="btn btn-outline-primary pull-right btn-sm waves-effect waves-dark">Add to Cart</button>
+            </span>
+            <span v-else>
+                <button disabled class="btn btn-warning pull-right btn-sm waves-effect waves-dark">Out of Stock!</button>
+                
+            </span>
             <h4 class="card-title">
                 <a :href="url" class="link">{{ product.name }}</a>
                 <a tab-index="0" v-if="product.categories.length != 0" class="category link text-muted" data-container="body" title="Categories"
@@ -90,6 +96,10 @@
                 } else return false
 
                 return result !== undefined
+            },
+            //Check if the product is deleted (Out of Stock)
+            isDeleted(){
+                return this.product.deleted_at !== null
             }
         },
         methods: {
