@@ -18,8 +18,10 @@ class AppServiceProvider extends ServiceProvider
         /**
          * Add the categories and the tags to all views
          */
-        view()->share('categories', Category::withCount('products')->get() );
-        view()->share('tags', Tag::withCount('products')->get() );
+        $categories = \Schema::hasTable('categories') ? Category::withCount('products')->get() : [] ;
+        $tags= \Schema::hasTable('tags') ? Tag::withCount('products')->get() : [];
+        view()->share('categories', $categories);
+        view()->share('tags',  $tags );
 
         /**
          * Add the custom method to get most used tags and categories
